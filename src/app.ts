@@ -6,6 +6,8 @@ import logger from 'morgan';
 import dotenv from 'dotenv'
 dotenv.config();
 
+import Router from './routes/index';
+
 const app = express();
 
 // view engine setup
@@ -17,6 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', Router);
 
 mongoose
     .connect(`${process.env.MONGODB_URI}`, {
