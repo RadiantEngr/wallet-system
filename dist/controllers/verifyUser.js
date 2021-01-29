@@ -55,6 +55,9 @@ var verifyUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 return [4 /*yield*/, User.findOne({ email: email })];
             case 1:
                 user = _a.sent();
+                if (user.isVerified) {
+                    return [2 /*return*/, res.status(400).json({ Error: "Your are already a verified user" })];
+                }
                 userName = user.userName, password = user.password, token = user.token;
                 secret = userName + "-" + password;
                 payload = jwt_simple_1.default.decode(token, secret);
@@ -65,11 +68,12 @@ var verifyUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 return [4 /*yield*/, User.findOneAndUpdate({ email: email }, {
                         $set: {
                             isVerified: true,
+                            token: null,
                         },
                     })];
             case 2:
                 _a.sent();
-                res.status(200).json({ Success: "You are successfully signed up" });
+                res.status(200).json({ Success: "Email verification Successful! You are successfully signed up" });
                 return [3 /*break*/, 4];
             case 3:
                 err_1 = _a.sent();
