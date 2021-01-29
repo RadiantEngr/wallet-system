@@ -3,12 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "main": "index.js",
-  "repository": "git@github.com:RadiantEngr/wallet-system.git",
-  "author": "RadiantEngr <onaolapo.ak@gmail.com>",
-  "license": "MIT",
   "scripts": {
     "start": "nodemon ./bin/www"
   },
+  "keywords": [
+    "heroku"
+  ],
+  "repository": "git@github.com:RadiantEngr/wallet-system.git",
+  "author": "RadiantEngr <onaolapo.ak@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "14.15.4"
+  },
+  
   "dependencies": {
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
