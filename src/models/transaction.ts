@@ -2,44 +2,51 @@ import Joi from "joi";
 import mongoose from "mongoose";
 
 const Transaction = mongoose.model(
-    "Transaction",
-    new mongoose.Schema({
-        transactionType: {
-            type: String,
-            required: true,
-        },
-        owner: {
-            type: String,
-        },
-        currency: {
-            type: String,
-            required: true,
-        },
-        amount: {
-            type: Number,
-            required: true,
-        },
-        isApproved: {
-            type: Boolean,
-            default: false,
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-        },
-        updatedAt: {
-            type: Date,
-            default: null,
-        },
-    })
+  "Transaction",
+  new mongoose.Schema({
+    transactionType: {
+      type: String,
+      required: true,
+    },
+    owner: {
+      type: String,
+    },
+    transactionCurrency: {
+      type: String,
+      required: true,
+    },
+    convertedTo: {
+      type: String,
+    },
+    amount: {
+      type: Number,
+      required: true,
+    },
+    conversionAmount: {
+      type: String,
+    },
+    isApproved: {
+      type: Boolean,
+      default: false,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    updatedAt: {
+      type: Date,
+      default: null,
+    },
+  })
 );
 
 const validateTransaction = (transaction: any) => {
     const schema = Joi.object({
         transactionType: Joi.string().required(),
         owner: Joi.string(),
-        currency: Joi.string().required(),
+        transactionCurrency: Joi.string().required(),
         amount: Joi.number().required(),
+        convertedTo: Joi.string(),
         isApproved: Joi.boolean(),
     });
 

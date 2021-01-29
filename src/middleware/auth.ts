@@ -5,13 +5,15 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
     try {
         const { token } = req.headers;
         const { id } = req.params;
+
         if (!token)
-          return res.status(401).send("Access denied. No token provised.");
+            return res.status(401).json({ Error: "Access denied. No token provised." });
+        
         const decodedToken = jwt.decode(`${token}`, `${process.env.JWT_SECRET}`);
         const { _id } = decodedToken;
 
         if (id !== _id) {
-            res.status(400).json({Error: "Invalid user identity"})
+            return res.status(400).json({Error: "Invalid user identity"})
         }
         
         next();
