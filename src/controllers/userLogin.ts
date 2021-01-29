@@ -1,11 +1,11 @@
 import jwt from "jwt-simple";
 import bcrypt from "bcrypt";
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import { User } from "../models/user";
 import dotenv from "dotenv";
 dotenv.config();
 
-const userLogin = async (req: Request, res: Response, next: NextFunction) => {
+const userLogin = async (req: Request, res: Response) => {
     try {
         const { email, passwordEntered } = req.body;
         const user = await User.findOne({ email });
