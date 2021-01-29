@@ -32,6 +32,6 @@ mongoose_1.default
     .catch(function (err) {
     return console.error("Unable to connect to Database...", err.message);
 });
-var port = process.env.PORT || 4500;
-app.listen(port, function () { return console.log("Listening on port " + port + "..."); });
+// const port = process.env.PORT || 4500;
+// app.listen(port, () => console.log(`Listening on port ${port}...`));
 exports.default = app;
