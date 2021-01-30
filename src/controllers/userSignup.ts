@@ -47,7 +47,7 @@ const signUp = async (req: Request, res: Response) => {
           .status(200)
           .json({
             Message:
-              "An OTP has been sent to your email address. Enter the code to complete your registration.",
+              "An OTP has been sent to your email address. Kindly enter the code to complete your registration.",
           });
       }
 
@@ -64,8 +64,7 @@ const signUp = async (req: Request, res: Response) => {
       .status(200)
       .json({
         Message:
-          "An OTP has been sent to your email address. Enter the code to complete your registration.",
-        data,
+          "An OTP has been sent to your email address. Kindly enter the code to complete your registration."
       });
   } catch (err) {
     res.status(400).json({ Error: err.message });

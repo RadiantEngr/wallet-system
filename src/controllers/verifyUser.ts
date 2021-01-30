@@ -13,6 +13,9 @@ const verifyUser = async (req: Request, res: Response) => {
     }
 
     const user = await User.findOne({ email });
+    if (user.isVerified) {
+      return res.status(400).json({ Error: "Your are already a verified user" });
+    }
     const { userName, password, token } = user;
 
     const secret = `${userName}-${password}`;
@@ -28,10 +31,11 @@ const verifyUser = async (req: Request, res: Response) => {
       {
         $set: {
           isVerified: true,
+          token: null,
         },
       }
     );
-    res.status(200).json({ Success: "You are successfully signed up" });
+    res.status(200).json({ Success: "Email verification Successful! You are successfully signed up" });
   } catch (err) {
     res.status(401).json({ Error: err.message });
   }

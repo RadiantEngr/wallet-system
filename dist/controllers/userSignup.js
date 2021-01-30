@@ -84,7 +84,7 @@ var signUp = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 return [2 /*return*/, res
                         .status(200)
                         .json({
-                        Message: "An OTP has been sent to your email address. Enter the code to complete your registration.",
+                        Message: "An OTP has been sent to your email address. Kindly enter the code to complete your registration.",
                     })];
             case 4: return [2 /*return*/, res.status(400).json({ Error: "You are already signed up" })];
             case 5:
@@ -98,8 +98,7 @@ var signUp = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 res
                     .status(200)
                     .json({
-                    Message: "An OTP has been sent to your email address. Enter the code to complete your registration.",
-                    data: data,
+                    Message: "An OTP has been sent to your email address. Kindly enter the code to complete your registration."
                 });
                 return [3 /*break*/, 8];
             case 7:
