@@ -4,6 +4,8 @@ import verifyUser from "../controllers/verifyUser";
 import createAdmin from "../controllers/createAdmin";
 import userLogin from "../controllers/userLogin";
 import adminLogin from "../controllers/adminLogin";
+import makeTransaction from "../controllers/makeTransaction"
+import auth from "../middleware/auth";
 
 
 const router = express.Router();
@@ -17,6 +19,10 @@ router.post("/admin", createAdmin);
 router.post("/userlogin", userLogin);
 
 router.post("/adminlogin", adminLogin);
+
+router.post("/transaction/:id", auth, makeTransaction);
+
+router.get("/auth/:id", auth);
 
 
 export default router;

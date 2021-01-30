@@ -9,6 +9,7 @@ const adminLogin = async (req: Request, res: Response) => {
   try {
     const { email, passwordEntered } = req.body;
     const admin = await Admin.findOne({ email });
+    
     if (!admin) {
       return res.status(400).json({ Error: "Invalid email or password" });
     }
