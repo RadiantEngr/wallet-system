@@ -26,7 +26,8 @@ var Transaction = mongoose_1.default.model("Transaction", new mongoose_1.default
         required: true,
     },
     conversionAmount: {
-        type: String,
+        type: Number,
+        default: 0,
     },
     isApproved: {
         type: Boolean,
@@ -47,8 +48,9 @@ var validateTransaction = function (transaction) {
         transactionType: joi_1.default.string().required(),
         owner: joi_1.default.string(),
         transactionCurrency: joi_1.default.string().required(),
-        amount: joi_1.default.number().required(),
         convertedTo: joi_1.default.string(),
+        amount: joi_1.default.number().required(),
+        conversionAmount: joi_1.default.number(),
         isApproved: joi_1.default.boolean(),
     });
     return schema.validate(transaction);

@@ -54,6 +54,7 @@ var signUp = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                     throw Error(error.details[0].message);
                 }
                 userName = value.userName, email = value.email, password = value.password;
+                value.accountType = value.accountType.toUpperCase();
                 random = Math.floor(100000 + Math.random() * 900000);
                 heading = "EMAIL VERIFICATION";
                 content = "Your one time password is " + random + ". Kindly type in this OTP to complete your registration.\nThank you!";

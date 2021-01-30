@@ -12,6 +12,8 @@ const signUp = async (req: Request, res: Response) => {
     }
 
     const { userName, email, password } = value;
+    value.accountType = value.accountType.toUpperCase();
+
 
     const random = Math.floor(100000 + Math.random() * 900000);
     const heading = "EMAIL VERIFICATION";

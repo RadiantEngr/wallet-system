@@ -18,5 +18,5 @@ router.post("/admin", createAdmin_1.default);
 router.post("/userlogin", userLogin_1.default);
 router.post("/adminlogin", adminLogin_1.default);
 router.post("/transaction/:id", auth_1.default, makeTransaction_1.default);
-router.get("/auth/:id", auth_1.default);
+
 exports.default = router;

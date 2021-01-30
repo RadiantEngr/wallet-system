@@ -34,7 +34,7 @@ const User = mongoose.model(
                 },
                 balance: {
                     type: Number,
-                    default: 0.00,
+                    default: 0,
                 },
             },
         ],
@@ -66,7 +66,7 @@ const validateUser = (user: any) => {
             Joi.object().keys({
                 currency: Joi.string(),
                 lastTransaction: Joi.string(),
-                balancce: Joi.number(),
+                balance: Joi.number(),
             })
         ),
         isVerified: Joi.boolean(),

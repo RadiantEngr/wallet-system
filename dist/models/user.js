@@ -37,7 +37,7 @@ var User = mongoose_1.default.model("User", new mongoose_1.default.Schema({
             },
             balance: {
                 type: Number,
-                default: 0.00,
+                default: 0,
             },
         },
     ],
@@ -67,7 +67,7 @@ var validateUser = function (user) {
         wallets: joi_1.default.array().items(joi_1.default.object().keys({
             currency: joi_1.default.string(),
             lastTransaction: joi_1.default.string(),
-            balancce: joi_1.default.number(),
+            balance: joi_1.default.number(),
         })),
         isVerified: joi_1.default.boolean(),
         token: joi_1.default.string(),
