@@ -14,13 +14,20 @@ var Transaction = mongoose_1.default.model("Transaction", new mongoose_1.default
     owner: {
         type: String,
     },
-    currency: {
+    transactionCurrency: {
         type: String,
         required: true,
+    },
+    convertedTo: {
+        type: String,
     },
     amount: {
         type: Number,
         required: true,
+    },
+    conversionAmount: {
+        type: Number,
+        default: 0,
     },
     isApproved: {
         type: Boolean,
@@ -40,8 +47,10 @@ var validateTransaction = function (transaction) {
     var schema = joi_1.default.object({
         transactionType: joi_1.default.string().required(),
         owner: joi_1.default.string(),
-        currency: joi_1.default.string().required(),
+        transactionCurrency: joi_1.default.string().required(),
+        convertedTo: joi_1.default.string(),
         amount: joi_1.default.number().required(),
+        conversionAmount: joi_1.default.number(),
         isApproved: joi_1.default.boolean(),
     });
     return schema.validate(transaction);

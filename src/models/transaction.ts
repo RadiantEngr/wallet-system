@@ -23,7 +23,8 @@ const Transaction = mongoose.model(
       required: true,
     },
     conversionAmount: {
-      type: String,
+      type: Number,
+      default: 0,
     },
     isApproved: {
       type: Boolean,
@@ -42,12 +43,13 @@ const Transaction = mongoose.model(
 
 const validateTransaction = (transaction: any) => {
     const schema = Joi.object({
-        transactionType: Joi.string().required(),
-        owner: Joi.string(),
-        transactionCurrency: Joi.string().required(),
-        amount: Joi.number().required(),
-        convertedTo: Joi.string(),
-        isApproved: Joi.boolean(),
+      transactionType: Joi.string().required(),
+      owner: Joi.string(),
+      transactionCurrency: Joi.string().required(),
+      convertedTo: Joi.string(),
+      amount: Joi.number().required(),
+      conversionAmount: Joi.number(),
+      isApproved: Joi.boolean(),
     });
 
     return schema.validate(transaction);

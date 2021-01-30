@@ -22,7 +22,7 @@ router.post("/adminlogin", adminLogin);
 
 router.post("/transaction/:id", auth, makeTransaction);
 
-router.get("/auth/:id", auth);
+// router.get("/auth/:id", auth);
 
 
 export default router;
