@@ -9,11 +9,11 @@ var auth = function (req, res, next) {
         var token = req.headers.token;
         var id = req.params.id;
         if (!token)
-            return res.status(401).send("Access denied. No token provised.");
+            return res.status(401).json({ Error: "Access denied. No token provised." });
         var decodedToken = jwt_simple_1.default.decode("" + token, "" + process.env.JWT_SECRET);
         var _id = decodedToken._id;
         if (id !== _id) {
-            res.status(400).json({ Error: "Invalid user identity" });
+            return res.status(400).json({ Error: "Invalid user identity" });
         }
         next();
     }
