@@ -5,7 +5,7 @@ import logger from 'morgan';
 import dotenv from 'dotenv'
 dotenv.config();
 
-import Router from './routes/index';
+import Router from './routes';
 
 const app = express();
 
