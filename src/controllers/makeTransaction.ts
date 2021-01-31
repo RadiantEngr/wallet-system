@@ -83,23 +83,6 @@ const makeTransaction = async (req: Request, res: Response) => {
           }
         );
       }
-
-      //Noob funding
-      await User.findOneAndUpdate(
-        { email },
-        {
-          $set: {
-            wallets: [
-              {
-                currency: walletCurrency,
-                lastTransaction: `${transactionType} of ${amount} ${transactionCurrency}`,
-                balance: walletBalance.toFixed(2),
-              },
-            ],
-            updatedAt: Date.now(),
-          },
-        }
-      );
     }
 
     // //CASES WHEN THE USER IS AN ELITE
@@ -122,7 +105,7 @@ const makeTransaction = async (req: Request, res: Response) => {
     const objIndex = wallets.indexOf(matchObj);
     
     // //When the transaction currency already exists
-    if (matchObj) {
+    if (matchObj !== null) {
       const walletCurrency = matchObj.currency;
       let walletBalance = matchObj.balance;
 

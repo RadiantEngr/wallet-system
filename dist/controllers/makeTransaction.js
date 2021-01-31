@@ -44,7 +44,7 @@ var makeTransaction = function (req, res) { return __awaiter(void 0, void 0, voi
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 22, , 23]);
+                _b.trys.push([0, 20, , 21]);
                 id = req.params.id;
                 return [4 /*yield*/, User.findById(id)];
             case 1:
@@ -82,7 +82,7 @@ var makeTransaction = function (req, res) { return __awaiter(void 0, void 0, voi
                 else {
                     return [2 /*return*/, res.status(400).json({ Error: "Invalid transaction type" })];
                 }
-                if (!(accountType == "NOOB")) return [3 /*break*/, 7];
+                if (!(accountType == "NOOB")) return [3 /*break*/, 5];
                 walletCurrency = wallets[0].currency;
                 walletBalance = wallets[0].balance;
                 return [4 /*yield*/, currencyMethods_1.convert(transactionCurrency_1, walletCurrency, amount)];
@@ -112,50 +112,32 @@ var makeTransaction = function (req, res) { return __awaiter(void 0, void 0, voi
             case 4:
                 _b.sent();
                 _b.label = 5;
-            case 5: 
-            //Noob funding
-            return [4 /*yield*/, User.findOneAndUpdate({ email: email }, {
-                    $set: {
-                        wallets: [
-                            {
-                                currency: walletCurrency,
-                                lastTransaction: transactionType + " of " + amount + " " + transactionCurrency_1,
-                                balance: walletBalance.toFixed(2),
-                            },
-                        ],
-                        updatedAt: Date.now(),
-                    },
-                })];
-            case 6:
-                //Noob funding
-                _b.sent();
-                _b.label = 7;
-            case 7:
+            case 5:
                 mainCurrency = wallets[0].currency;
                 mainBalance = wallets[0].balance;
                 return [4 /*yield*/, currencyMethods_1.convert(transactionCurrency_1, mainCurrency, amount)];
-            case 8:
+            case 6:
                 convertToMain = _b.sent();
                 mainBalanceAfterTransaction = mainBalance + convertToMain;
                 matchObj = wallets.filter(function (wallet) { return wallet.currency == transactionCurrency_1; });
                 matchObj = matchObj[0];
                 objIndex = wallets.indexOf(matchObj);
-                if (!matchObj) return [3 /*break*/, 15];
+                if (!(matchObj !== null)) return [3 /*break*/, 13];
                 walletCurrency = matchObj.currency;
                 walletBalance = matchObj.balance;
                 return [4 /*yield*/, currencyMethods_1.convert(transactionCurrency_1, walletCurrency, amount)];
-            case 9:
+            case 7:
                 convertedAmount = _b.sent();
                 walletBalance += convertedAmount;
                 value.convertedTo = walletCurrency;
                 value.conversionAmount = convertedAmount.toFixed(2);
-                if (!(transactionType == "WITHDRAWAL")) return [3 /*break*/, 13];
+                if (!(transactionType == "WITHDRAWAL")) return [3 /*break*/, 11];
                 amount *= -1;
                 value.isApproved = true;
                 if (walletBalance < 0 && mainBalanceAfterTransaction < 0) {
                     return [2 /*return*/, res.status(400).json({ Error: "Insufficient balance" })];
                 }
-                if (!(walletBalance < 0 && mainBalanceAfterTransaction > 0)) return [3 /*break*/, 11];
+                if (!(walletBalance < 0 && mainBalanceAfterTransaction > 0)) return [3 /*break*/, 9];
                 value.convertedTo = mainCurrency;
                 value.conversionAmount = convertToMain.toFixed(2);
                 value.isApproved = true;
@@ -171,11 +153,28 @@ var makeTransaction = function (req, res) { return __awaiter(void 0, void 0, voi
                             updatedAt: Date.now(),
                         },
                     })];
+            case 8:
+                _b.sent();
+                _b.label = 9;
+            case 9:
+                if (!(walletBalance > 0)) return [3 /*break*/, 11];
+                return [4 /*yield*/, User.findOneAndUpdate({ email: email, "wallets.currency": walletCurrency }, {
+                        $set: {
+                            "wallets.$": [
+                                {
+                                    currency: walletCurrency,
+                                    lastTransaction: transactionType + " of " + amount + " " + transactionCurrency_1,
+                                    balance: walletBalance.toFixed(2),
+                                },
+                            ],
+                            updatedAt: Date.now(),
+                        },
+                    })];
             case 10:
                 _b.sent();
                 _b.label = 11;
             case 11:
-                if (!(walletBalance > 0)) return [3 /*break*/, 13];
+                if (!(transactionType == "FUNDING")) return [3 /*break*/, 13];
                 return [4 /*yield*/, User.findOneAndUpdate({ email: email, "wallets.currency": walletCurrency }, {
                         $set: {
                             "wallets.$": [
@@ -192,24 +191,7 @@ var makeTransaction = function (req, res) { return __awaiter(void 0, void 0, voi
                 _b.sent();
                 _b.label = 13;
             case 13:
-                if (!(transactionType == "FUNDING")) return [3 /*break*/, 15];
-                return [4 /*yield*/, User.findOneAndUpdate({ email: email, "wallets.currency": walletCurrency }, {
-                        $set: {
-                            "wallets.$": [
-                                {
-                                    currency: walletCurrency,
-                                    lastTransaction: transactionType + " of " + amount + " " + transactionCurrency_1,
-                                    balance: walletBalance.toFixed(2),
-                                },
-                            ],
-                            updatedAt: Date.now(),
-                        },
-                    })];
-            case 14:
-                _b.sent();
-                _b.label = 15;
-            case 15:
-                if (!(transactionType == "WITHDRAWAL" && !matchObj)) return [3 /*break*/, 17];
+                if (!(transactionType == "WITHDRAWAL" && !matchObj)) return [3 /*break*/, 15];
                 amount *= -1;
                 value.isApproved = true;
                 if (mainBalanceAfterTransaction < 0) {
@@ -230,11 +212,11 @@ var makeTransaction = function (req, res) { return __awaiter(void 0, void 0, voi
                             updatedAt: Date.now(),
                         },
                     })];
-            case 16:
+            case 14:
                 _b.sent();
-                _b.label = 17;
-            case 17:
-                if (!(transactionType == "FUNDING" && !matchObj)) return [3 /*break*/, 20];
+                _b.label = 15;
+            case 15:
+                if (!(transactionType == "FUNDING" && !matchObj)) return [3 /*break*/, 18];
                 return [4 /*yield*/, User.findOneAndUpdate({ email: email }, {
                         $addToSet: {
                             wallets: {
@@ -244,27 +226,27 @@ var makeTransaction = function (req, res) { return __awaiter(void 0, void 0, voi
                             },
                         },
                     })];
-            case 18:
+            case 16:
                 _b.sent();
                 return [4 /*yield*/, User.findOneAndUpdate({ email: email }, {
                         $set: {
                             updatedAt: Date.now(),
                         },
                     })];
-            case 19:
+            case 17:
                 _b.sent();
-                _b.label = 20;
-            case 20:
+                _b.label = 18;
+            case 18:
                 newTransaction = new Transaction(value);
                 return [4 /*yield*/, newTransaction.save()];
-            case 21:
+            case 19:
                 data = _b.sent();
                 return [2 /*return*/, res.status(200).json({ data: data })];
-            case 22:
+            case 20:
                 err_1 = _b.sent();
                 res.status(400).json({ Error: err_1.message });
-                return [3 /*break*/, 23];
-            case 23: return [2 /*return*/];
+                return [3 /*break*/, 21];
+            case 21: return [2 /*return*/];
         }
     });
 }); };
