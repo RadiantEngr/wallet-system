@@ -42,34 +42,50 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var jwt_simple_1 = __importDefault(require("jwt-simple"));
 var bcrypt_1 = __importDefault(require("bcrypt"));
 var user_1 = require("../models/user");
+var admin_1 = require("../models/admin");
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 var userLogin = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, email, passwordEntered, user, password, _id, accountType, isPasswordValid, token, err_1;
+    var _a, email, passwordEntered, user, admin, password, _id, accountType, isPasswordValid, token, password, _id, accountType, isPasswordValid, token, err_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 3, , 4]);
+                _b.trys.push([0, 7, , 8]);
                 _a = req.body, email = _a.email, passwordEntered = _a.passwordEntered;
                 return [4 /*yield*/, user_1.User.findOne({ email: email })];
             case 1:
                 user = _b.sent();
-                if (!user) {
+                return [4 /*yield*/, admin_1.Admin.findOne({ email: email })];
+            case 2:
+                admin = _b.sent();
+                if (!user && !admin) {
                     return [2 /*return*/, res.status(400).json({ Error: "Invalid email or password" })];
                 }
-                password = user.password, _id = user._id, accountType = user.accountType;
+                if (!!user) return [3 /*break*/, 4];
+                password = admin.password, _id = admin._id, accountType = admin.accountType;
                 return [4 /*yield*/, bcrypt_1.default.compare(passwordEntered, password)];
-            case 2:
+            case 3:
                 isPasswordValid = _b.sent();
                 if (!isPasswordValid) {
                     return [2 /*return*/, res.status(400).json({ Error: "Invalid email or password" })];
                 }
                 token = jwt_simple_1.default.encode({ _id: _id, accountType: accountType }, "" + process.env.JWT_SECRET);
                 return [2 /*return*/, res.status(200).json({ _id: _id, accountType: accountType, token: token })];
-            case 3:
+            case 4:
+                password = user.password, _id = user._id, accountType = user.accountType;
+                return [4 /*yield*/, bcrypt_1.default.compare(passwordEntered, password)];
+            case 5:
+                isPasswordValid = _b.sent();
+                if (!isPasswordValid) {
+                    return [2 /*return*/, res.status(400).json({ Error: "Invalid email or password" })];
+                }
+                token = jwt_simple_1.default.encode({ _id: _id, accountType: accountType }, "" + process.env.JWT_SECRET);
+                return [2 /*return*/, res.status(200).json({ _id: _id, accountType: accountType, token: token })];
+            case 6: return [3 /*break*/, 8];
+            case 7:
                 err_1 = _b.sent();
                 return [2 /*return*/, res.status(500).json({ Error: err_1.message })];
-            case 4: return [2 /*return*/];
+            case 8: return [2 /*return*/];
         }
     });
 }); };
