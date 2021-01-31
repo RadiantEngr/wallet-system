@@ -30,3 +30,6 @@ https://sleepy-sierra-67571.herokuapp.com/
 
 ### API documentation:
 https://web.postman.co/documentation/12793868-7ba4516f-08ce-47d3-b702-31df37cc2832/publish
+
+### Admin login
+The email address of the admin is appadministrator@admin.com
