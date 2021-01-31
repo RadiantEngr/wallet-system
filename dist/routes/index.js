@@ -11,6 +11,8 @@ var userLogin_1 = __importDefault(require("../controllers/userLogin"));
 var adminLogin_1 = __importDefault(require("../controllers/adminLogin"));
 var makeTransaction_1 = __importDefault(require("../controllers/makeTransaction"));
 var auth_1 = __importDefault(require("../middleware/auth"));
+var changeAccountType_1 = __importDefault(require("../controllers/changeAccountType"));
+var changeMainCurrency_1 = __importDefault(require("../controllers/changeMainCurrency"));
 var router = express_1.default.Router();
 router.post("/signup", userSignup_1.default);
 router.put("/verifyuser/:email", verifyUser_1.default);
@@ -18,5 +20,6 @@ router.post("/admin", createAdmin_1.default);
 router.post("/userlogin", userLogin_1.default);
 router.post("/adminlogin", adminLogin_1.default);
 router.post("/transaction/:id", auth_1.default, makeTransaction_1.default);
-
+router.put("/changeaccount/:id", auth_1.default, changeAccountType_1.default);
+router.put("/changemain/:id", auth_1.default, changeMainCurrency_1.default);
 exports.default = router;

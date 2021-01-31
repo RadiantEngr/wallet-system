@@ -1,6 +1,6 @@
 const { Transaction, validateTransaction } = require("../models/transaction");
 import { Request, Response } from "express";
-import { convert, fixerCurrencies } from "./currencyConverter";
+import { convert, fixerCurrencies } from "./currencyMethods";
 const { User } = require("../models/user");
 
 const makeTransaction = async (req: Request, res: Response) => {

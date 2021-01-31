@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var _a = require("../models/transaction"), Transaction = _a.Transaction, validateTransaction = _a.validateTransaction;
-var currencyConverter_1 = require("./currencyConverter");
+var currencyMethods_1 = require("./currencyMethods");
 var User = require("../models/user").User;
 var makeTransaction = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var id, user, _a, error, value, transactionType, transactionCurrency_1, amount, supportedCurrencies, accountType, wallets, email, walletCurrency, walletBalance, convertedAmount, mainCurrency, mainBalance, convertToMain, mainBalanceAfterTransaction, matchObj, objIndex, walletCurrency, walletBalance, convertedAmount, newTransaction, data, err_1;
@@ -61,7 +61,7 @@ var makeTransaction = function (req, res) { return __awaiter(void 0, void 0, voi
                 transactionType = value.transactionType, transactionCurrency_1 = value.transactionCurrency, amount = value.amount;
                 transactionType = transactionType.toUpperCase();
                 value.owner = id;
-                return [4 /*yield*/, currencyConverter_1.fixerCurrencies()];
+                return [4 /*yield*/, currencyMethods_1.fixerCurrencies()];
             case 2:
                 supportedCurrencies = _b.sent();
                 if (amount < 0) {
@@ -85,7 +85,7 @@ var makeTransaction = function (req, res) { return __awaiter(void 0, void 0, voi
                 if (!(accountType == "NOOB")) return [3 /*break*/, 7];
                 walletCurrency = wallets[0].currency;
                 walletBalance = wallets[0].balance;
-                return [4 /*yield*/, currencyConverter_1.convert(transactionCurrency_1, walletCurrency, amount)];
+                return [4 /*yield*/, currencyMethods_1.convert(transactionCurrency_1, walletCurrency, amount)];
             case 3:
                 convertedAmount = _b.sent();
                 walletBalance += convertedAmount;
@@ -133,7 +133,7 @@ var makeTransaction = function (req, res) { return __awaiter(void 0, void 0, voi
             case 7:
                 mainCurrency = wallets[0].currency;
                 mainBalance = wallets[0].balance;
-                return [4 /*yield*/, currencyConverter_1.convert(transactionCurrency_1, mainCurrency, amount)];
+                return [4 /*yield*/, currencyMethods_1.convert(transactionCurrency_1, mainCurrency, amount)];
             case 8:
                 convertToMain = _b.sent();
                 mainBalanceAfterTransaction = mainBalance + convertToMain;
@@ -143,7 +143,7 @@ var makeTransaction = function (req, res) { return __awaiter(void 0, void 0, voi
                 if (!matchObj) return [3 /*break*/, 15];
                 walletCurrency = matchObj.currency;
                 walletBalance = matchObj.balance;
-                return [4 /*yield*/, currencyConverter_1.convert(transactionCurrency_1, walletCurrency, amount)];
+                return [4 /*yield*/, currencyMethods_1.convert(transactionCurrency_1, walletCurrency, amount)];
             case 9:
                 convertedAmount = _b.sent();
                 walletBalance += convertedAmount;
