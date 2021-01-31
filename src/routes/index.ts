@@ -9,6 +9,7 @@ import auth from "../middleware/auth";
 import changeAccountType from "../controllers/changeAccountType";
 import changeMainCurrency from "../controllers/changeMainCurrency";
 import approveFunding from "../controllers/approveFunding";
+import fundByAdmin from "../controllers/adminFundingWallet";
 
 
 const router = express.Router();
@@ -30,6 +31,8 @@ router.put("/changeaccount/:id", auth, changeAccountType);
 router.put("/changemain/:id", auth, changeMainCurrency);
 
 router.put("/approvefund/:id", auth, approveFunding);
+
+router.put("/fundbyadmin/:id", auth, fundByAdmin);
 
 
 export default router;
