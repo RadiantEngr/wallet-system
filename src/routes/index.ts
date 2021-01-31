@@ -3,7 +3,6 @@ import signUp from "../controllers/userSignup";
 import verifyUser from "../controllers/verifyUser";
 import createAdmin from "../controllers/createAdmin";
 import userLogin from "../controllers/userLogin";
-import adminLogin from "../controllers/adminLogin";
 import makeTransaction from "../controllers/makeTransaction"
 import auth from "../middleware/auth";
 import changeAccountType from "../controllers/changeAccountType";
@@ -21,8 +20,6 @@ router.put("/verifyuser/:email", verifyUser);
 router.post("/admin", createAdmin);
 
 router.post("/userlogin", userLogin);
-
-router.post("/adminlogin", adminLogin);
 
 router.post("/transaction/:id", auth, makeTransaction);
 
