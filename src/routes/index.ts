@@ -7,6 +7,7 @@ import adminLogin from "../controllers/adminLogin";
 import makeTransaction from "../controllers/makeTransaction"
 import auth from "../middleware/auth";
 import changeAccountType from "../controllers/changeAccountType";
+import changeMainCurrency from "../controllers/changeMainCurrency";
 
 
 const router = express.Router();
@@ -24,6 +25,8 @@ router.post("/adminlogin", adminLogin);
 router.post("/transaction/:id", auth, makeTransaction);
 
 router.put("/changeaccount/:id", auth, changeAccountType);
+
+router.put("/changemain/:id", auth, changeMainCurrency);
 
 
 export default router;
