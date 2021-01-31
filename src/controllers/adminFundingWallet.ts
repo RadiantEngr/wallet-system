@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { User } from "../models/user";
 import { Admin } from "../models/admin";
-import { Transaction } from "../models/transaction";
 
 const fundByAdmin = async (req: Request, res: Response) => {
   try {
