@@ -10,6 +10,7 @@ import changeAccountType from "../controllers/changeAccountType";
 import changeMainCurrency from "../controllers/changeMainCurrency";
 import approveFunding from "../controllers/approveFunding";
 import fundByAdmin from "../controllers/adminFundingWallet";
+import { findUsers, findUser, findTransactions, findTransaction } from "../controllers/findData";
 
 
 const router = express.Router();
@@ -33,6 +34,15 @@ router.put("/changemain/:id", auth, changeMainCurrency);
 router.put("/approvefund/:id", auth, approveFunding);
 
 router.put("/fundbyadmin/:id", auth, fundByAdmin);
+
+router.get("/findusers", findUsers);
+
+router.get("/finduser/:id", findUser);
+
+router.get("/findtransactions", findTransactions);
+
+router.get("/findtransaction/:id", findTransaction);
+
 
 
 export default router;
