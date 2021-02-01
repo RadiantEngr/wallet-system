@@ -11,7 +11,7 @@ import changeMainCurrency from "../controllers/changeMainCurrency";
 import approveFunding from "../controllers/approveFunding";
 import fundByAdmin from "../controllers/adminFundingWallet";
 import { findUsers, findUser, findTransactions, findTransaction } from "../controllers/findData";
-
+import { deleteUser, deleteTransaction } from "../controllers/deleteItem";
 
 const router = express.Router();
 
@@ -43,6 +43,9 @@ router.get("/findtransactions", findTransactions);
 
 router.get("/findtransaction/:id", findTransaction);
 
+router.delete("/deleteuser/:id", deleteUser);
+
+router.delete("/deletetransaction/:id", deleteTransaction);
 
 
 export default router;

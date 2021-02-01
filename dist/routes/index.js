@@ -16,6 +16,7 @@ var changeMainCurrency_1 = __importDefault(require("../controllers/changeMainCur
 var approveFunding_1 = __importDefault(require("../controllers/approveFunding"));
 var adminFundingWallet_1 = __importDefault(require("../controllers/adminFundingWallet"));
 var findData_1 = require("../controllers/findData");
+var deleteItem_1 = require("../controllers/deleteItem");
 var router = express_1.default.Router();
 router.post("/signup", userSignup_1.default);
 router.put("/verifyuser/:email", verifyUser_1.default);
@@ -31,4 +32,6 @@ router.get("/findusers", findData_1.findUsers);
 router.get("/finduser/:id", findData_1.findUser);
 router.get("/findtransactions", findData_1.findTransactions);
 router.get("/findtransaction/:id", findData_1.findTransaction);
+router.delete("/deleteuser/:id", deleteItem_1.deleteUser);
+router.delete("/deletetransaction/:id", deleteItem_1.deleteTransaction);
 exports.default = router;
