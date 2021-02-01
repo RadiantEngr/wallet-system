@@ -15,6 +15,7 @@ var changeAccountType_1 = __importDefault(require("../controllers/changeAccountT
 var changeMainCurrency_1 = __importDefault(require("../controllers/changeMainCurrency"));
 var approveFunding_1 = __importDefault(require("../controllers/approveFunding"));
 var adminFundingWallet_1 = __importDefault(require("../controllers/adminFundingWallet"));
+var findData_1 = require("../controllers/findData");
 var router = express_1.default.Router();
 router.post("/signup", userSignup_1.default);
 router.put("/verifyuser/:email", verifyUser_1.default);
@@ -26,4 +27,8 @@ router.put("/changeaccount/:id", auth_1.default, changeAccountType_1.default);
 router.put("/changemain/:id", auth_1.default, changeMainCurrency_1.default);
 router.put("/approvefund/:id", auth_1.default, approveFunding_1.default);
 router.put("/fundbyadmin/:id", auth_1.default, adminFundingWallet_1.default);
+router.get("/findusers", findData_1.findUsers);
+router.get("/finduser/:id", findData_1.findUser);
+router.get("/findtransactions", findData_1.findTransactions);
+router.get("/findtransaction/:id", findData_1.findTransaction);
 exports.default = router;
