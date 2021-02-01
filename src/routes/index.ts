@@ -12,6 +12,7 @@ import approveFunding from "../controllers/approveFunding";
 import fundByAdmin from "../controllers/adminFundingWallet";
 import { findUsers, findUser, findTransactions, findTransaction } from "../controllers/findData";
 import { deleteUser, deleteTransaction } from "../controllers/deleteItem";
+import { findUsersByCategory, findTransactionsByCategory } from "../controllers/findByCategory";
 
 const router = express.Router();
 
@@ -46,6 +47,10 @@ router.get("/findtransaction/:id", findTransaction);
 router.delete("/deleteuser/:id", deleteUser);
 
 router.delete("/deletetransaction/:id", deleteTransaction);
+
+router.get("/usersbycategory/:accountType", findUsersByCategory);
+
+router.get("/transactionsbycategory/:transactionType", findTransactionsByCategory);
 
 
 export default router;

@@ -17,6 +17,7 @@ var approveFunding_1 = __importDefault(require("../controllers/approveFunding"))
 var adminFundingWallet_1 = __importDefault(require("../controllers/adminFundingWallet"));
 var findData_1 = require("../controllers/findData");
 var deleteItem_1 = require("../controllers/deleteItem");
+var findByCategory_1 = require("../controllers/findByCategory");
 var router = express_1.default.Router();
 router.post("/signup", userSignup_1.default);
 router.put("/verifyuser/:email", verifyUser_1.default);
@@ -34,4 +35,6 @@ router.get("/findtransactions", findData_1.findTransactions);
 router.get("/findtransaction/:id", findData_1.findTransaction);
 router.delete("/deleteuser/:id", deleteItem_1.deleteUser);
 router.delete("/deletetransaction/:id", deleteItem_1.deleteTransaction);
+router.get("/usersbycategory/:accountType", findByCategory_1.findUsersByCategory);
+router.get("/transactionsbycategory/:transactionType", findByCategory_1.findTransactionsByCategory);
 exports.default = router;
