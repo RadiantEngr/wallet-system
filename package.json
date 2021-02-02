@@ -41,7 +41,6 @@
     "@types/mongoose": "^5.10.3",
     "@types/morgan": "^1.9.2",
     "@types/nodemailer": "^6.4.0",
-    "@types/typescript": "^2.0.0",
     "nodemon": "^2.0.7"
   }
 }
