@@ -18,6 +18,7 @@ var adminFundingWallet_1 = __importDefault(require("../controllers/adminFundingW
 var findData_1 = require("../controllers/findData");
 var deleteItem_1 = require("../controllers/deleteItem");
 var findByCategory_1 = require("../controllers/findByCategory");
+var passwordReset_1 = require("../controllers/passwordReset");
 var router = express_1.default.Router();
 router.post("/signup", userSignup_1.default);
 router.put("/verifyuser/:email", verifyUser_1.default);
@@ -37,4 +38,6 @@ router.delete("/deleteuser/:id", deleteItem_1.deleteUser);
 router.delete("/deletetransaction/:id", deleteItem_1.deleteTransaction);
 router.get("/usersbycategory/:accountType", findByCategory_1.findUsersByCategory);
 router.get("/transactionsbycategory/:transactionType", findByCategory_1.findTransactionsByCategory);
+router.post("/passwordreset", passwordReset_1.requestPasswordReset);
+router.put("/passwordreset/:token", passwordReset_1.changePassword);
 exports.default = router;
