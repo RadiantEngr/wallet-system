@@ -13,6 +13,7 @@ import fundByAdmin from "../controllers/adminFundingWallet";
 import { findUsers, findUser, findTransactions, findTransaction } from "../controllers/findData";
 import { deleteUser, deleteTransaction } from "../controllers/deleteItem";
 import { findUsersByCategory, findTransactionsByCategory } from "../controllers/findByCategory";
+import { requestPasswordReset, changePassword } from "../controllers/passwordReset";
 
 const router = express.Router();
 
@@ -51,6 +52,10 @@ router.delete("/deletetransaction/:id", deleteTransaction);
 router.get("/usersbycategory/:accountType", findUsersByCategory);
 
 router.get("/transactionsbycategory/:transactionType", findTransactionsByCategory);
+
+router.post("/passwordreset", requestPasswordReset);
+
+router.put("/passwordreset/:token", changePassword);
 
 
 export default router;
